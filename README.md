@@ -1,5 +1,6 @@
 # My custom config for console prompt (Linux & Git For Windows)
 Feel free to use if you want
+
 Colors based on "Outer Wilds" and its DLC "Echoes Of The Eye"
 
 ## Installation script
