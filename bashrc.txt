@@ -8,14 +8,13 @@ if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
 fi
 
 git_prompt_info() {
-    local branch=$(__git_ps1 "%s")      # Nom de la branche ou commit court
-    [ -z "$branch" ] && return           # Si pas dans un repo Git, rien
+    local branch=$(__git_ps1 "%s")
+    [ -z "$branch" ] && return
 
     local upstream=""
     local ahead=0
     local behind=0
 
-    # Récupérer l'upstream
     local tracking=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
     if [ -n "$tracking" ]; then
         ahead=$(git rev-list --count ${tracking}..HEAD)
@@ -23,21 +22,20 @@ git_prompt_info() {
     fi
 
     # Modifs staged / unstaged
-    local dirty="□^|^s"
+    local dirty="✔"
     git diff --quiet --ignore-submodules 2>/dev/null || dirty="*"
 
     # Upstream symbol
     if [ "$ahead" -gt 0 ]; then
-        upstream+="□^f^q$ahead"
+        upstream+="↑$ahead"
     fi
     if [ "$behind" -gt 0 ]; then
         [ -n "$upstream" ] && upstream+=" / "
-        upstream+="□^f^s$behind"
+        upstream+="↓$behind"
     fi
-    [ -z "$upstream" ] && upstream="="   # Si synchronisé, affiche -
+    [ -z "$upstream" ] && upstream="="
 
-    # Construire la sortie
-    local out="($branch □^f^r $upstream"
+    local out="($branch → $upstream"
     [ -n "$dirty" ] && out+=" / $dirty"
     out+=" )"
 
