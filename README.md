@@ -33,4 +33,4 @@ With a git repo in the current folder:
 - push = git push
 - fpush <branch_name> = git push -u origin <branch_name>
 - pull = git pull
-- commit "<message>" = git commit -m "<message>"
+- commit "<commit_message>" = git commit -m "<commit_message>"
