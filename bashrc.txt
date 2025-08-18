@@ -1,0 +1,51 @@
+ORANGE='\[\033[38;2;255;124;37m\]'
+TURQUOISE='\[\033[38;2;21;205;187m\]'
+RESET='\[\033[0m\]'
+
+
+if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
+    source "/usr/share/git/completion/git-prompt.sh"
+fi
+
+git_prompt_info() {
+    local branch=$(__git_ps1 "%s")      # Nom de la branche ou commit court
+    [ -z "$branch" ] && return           # Si pas dans un repo Git, rien
+
+    local upstream=""
+    local ahead=0
+    local behind=0
+
+    # Récupérer l'upstream
+    local tracking=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+    if [ -n "$tracking" ]; then
+        ahead=$(git rev-list --count ${tracking}..HEAD)
+        behind=$(git rev-list --count HEAD..${tracking})
+    fi
+
+    # Modifs staged / unstaged
+    local dirty="□^|^s"
+    git diff --quiet --ignore-submodules 2>/dev/null || dirty="*"
+
+    # Upstream symbol
+    if [ "$ahead" -gt 0 ]; then
+        upstream+="□^f^q$ahead"
+    fi
+    if [ "$behind" -gt 0 ]; then
+        [ -n "$upstream" ] && upstream+=" / "
+        upstream+="□^f^s$behind"
+    fi
+    [ -z "$upstream" ] && upstream="="   # Si synchronisé, affiche -
+
+    # Construire la sortie
+    local out="($branch □^f^r $upstream"
+    [ -n "$dirty" ] && out+=" / $dirty"
+    out+=" )"
+
+    echo "$out"
+}
+
+set_bash_prompt() {
+    PS1="${ORANGE}\w ${TURQUOISE}$(git_prompt_info) ${RESET}> "
+}
+
+PROMPT_COMMAND=set_bash_prompt
