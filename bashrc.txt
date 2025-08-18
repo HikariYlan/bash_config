@@ -2,6 +2,12 @@ ORANGE='\[\033[38;2;255;124;37m\]'
 TURQUOISE='\[\033[38;2;21;205;187m\]'
 RESET='\[\033[0m\]'
 
+alias stat="git status"
+alias log="git log"
+alias push="git push"
+alias fpush="git push -u origin"
+alias pull="git pull"
+alias commit="git commit -m"
 
 if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
     source "/usr/share/git/completion/git-prompt.sh"
