@@ -1,7 +1,9 @@
 ORANGE='\[\033[38;2;255;124;37m\]'
 TURQUOISE='\[\033[38;2;21;205;187m\]'
 GREEN='\[\033[38;2;0;255;0m\]'
+DGREEN='\[\033[38;2;0;150;0m\]'
 RED='\[\033[38;2;255;0;0m\]'
+DRED='\[\033[38;2;150;0;0m\]'
 RESET='\[\033[0m\]'
 
 alias stat="git status"
@@ -35,11 +37,11 @@ git_prompt_info() {
 
     # Upstream symbol
     if [ "$ahead" -gt 0 ]; then
-        upstream+="${GREEN}↑$ahead${TURQUOISE}"
+        upstream+="${DGREEN}↑$ahead${TURQUOISE}"
     fi
     if [ "$behind" -gt 0 ]; then
         [ -n "$upstream" ] && upstream+=" / "
-        upstream+="${RED}↓$behind${TURQUOISE}"
+        upstream+="${DRED}↓$behind${TURQUOISE}"
     fi
     [ -z "$upstream" ] && upstream="${GREEN}=${TURQUOISE}"
 
@@ -47,11 +49,11 @@ git_prompt_info() {
     current_branch=$(git rev-parse --abbrev-ref HEAD)
 
     if [ "$current_branch" = "$default_branch" ]; then
-        local out="($branch → $upstream"
+        local out=" ($branch → $upstream"
         [ -n "$dirty" ] && out+=" / $dirty"
         out+=")"
     else
-        local out="($branch ↱ $upstream"
+        local out=" ($branch ↱ $upstream"
         [ -n "$dirty" ] && out+=" / $dirty"
         out+=")"
     fi
@@ -60,7 +62,7 @@ git_prompt_info() {
 }
 
 set_bash_prompt() {
-    PS1="${ORANGE}\w ${TURQUOISE}$(git_prompt_info) ${RESET}> "
+    PS1="${ORANGE}\w${TURQUOISE}$(git_prompt_info) ${RESET}> "
 }
 
 PROMPT_COMMAND=set_bash_prompt
