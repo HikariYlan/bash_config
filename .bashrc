@@ -41,9 +41,18 @@ git_prompt_info() {
     fi
     [ -z "$upstream" ] && upstream="="
 
-    local out="($branch → $upstream"
-    [ -n "$dirty" ] && out+=" / $dirty"
-    out+=" )"
+    default_branch=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+    if [ "$current_branch" = "$default_branch" ]; then
+        local out="($branch → $upstream"
+        [ -n "$dirty" ] && out+=" / $dirty"
+        out+=")"
+    else
+        local out="($branch ↱ $upstream"
+        [ -n "$dirty" ] && out+=" / $dirty"
+        out+=")"
+    fi
 
     echo "$out"
 }
