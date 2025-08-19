@@ -1,5 +1,7 @@
 ORANGE='\[\033[38;2;255;124;37m\]'
 TURQUOISE='\[\033[38;2;21;205;187m\]'
+GREEN='\[\033[38;2;0;255;0m\]'
+RED='\[\033[38;2;255;0;0m\]'
 RESET='\[\033[0m\]'
 
 alias stat="git status"
@@ -28,18 +30,18 @@ git_prompt_info() {
     fi
 
     # Modifs staged / unstaged
-    local dirty="✔"
-    git diff --quiet --ignore-submodules 2>/dev/null || dirty="*"
+    local dirty="${GREEN}✔${TURQUOISE}"
+    git diff --quiet --ignore-submodules 2>/dev/null || dirty="${RED}*${TURQUOISE}"
 
     # Upstream symbol
     if [ "$ahead" -gt 0 ]; then
-        upstream+="↑$ahead"
+        upstream+="${GREEN}↑$ahead${TURQUOISE}"
     fi
     if [ "$behind" -gt 0 ]; then
         [ -n "$upstream" ] && upstream+=" / "
-        upstream+="↓$behind"
+        upstream+="${RED}↓$behind${TURQUOISE}"
     fi
-    [ -z "$upstream" ] && upstream="="
+    [ -z "$upstream" ] && upstream="${GREEN}=${TURQUOISE}"
 
     default_branch=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
     current_branch=$(git rev-parse --abbrev-ref HEAD)
