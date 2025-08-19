@@ -12,7 +12,7 @@ OLD_DIR=$(pwd)
 cd ~
 git clone https://github.com/HikariYlan/bash_config.git
 cd bash_config
-cp bashrc.txt ~/.bashrc
+cp .bashrc ~/.bashrc
 source ~/.bashrc
 cd ..
 rm -rf bash_config
@@ -24,10 +24,16 @@ Just copy-paste this script into Linux's terminal or Git Bash's terminal and it 
 ## Display changes
 
 Base prompt:
+
 `absolute_path_to_current_folder > `
 
-With a git repo in the current folder:
+With a git repo (main branch):
+
 `absolute_path_to_current_folder (branch_name → comparison_with_upstream / checking_changes) > `
+
+With a git repo (other branch):
+
+`absolute_path_to_current_folder (branch_name ↱ comparison_with_upstream / checking_changes) > `
 
 ## Aliases
 
