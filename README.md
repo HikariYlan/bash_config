@@ -19,7 +19,7 @@ rm -rf bash_config
 cd ${OLD_DIR}
 ```
 
-Just copy-paste this script into any console prompt and it should work
+Just copy-paste this script into Linux's terminal or Git Bash's terminal and it should work
 
 ## Display changes
 
