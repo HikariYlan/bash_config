@@ -5,36 +5,23 @@ Colors based on "Outer Wilds" and its DLC "Echoes Of The Eye"
 
 ## Installation script
 
-# ⚠ Preexisting file will be overwritten ⚠
+### ⚠ Preexisting file will be overwritten ⚠
 ### Make sure to create a backup if you want to keep your actual .bashrc for later uses
-
-```shell
-OLD_DIR=$(pwd)
-cd ~
-git clone https://github.com/HikariYlan/bash_config.git
-cd bash_config
-cp .bashrc ~/.bashrc
-source ~/.bashrc
-cd ..
-rm -rf bash_config
-cd ${OLD_DIR}
-```
-
-Just copy-paste this script into Linux's terminal or Git Bash's terminal and it should work
+The installation script is available in the "Releases" section
 
 ## Display changes
 
 Base prompt:
 
-`absolute_path_to_current_folder > `
+![base_prompt](images/base_prompt.png)
 
 With a git repo (main branch):
 
-`absolute_path_to_current_folder (branch_name → comparison_with_upstream / checking_changes) > `
+![with_repo](images/with_repo.png)
 
 With a git repo (other branch):
 
-`absolute_path_to_current_folder (branch_name ↱ comparison_with_upstream / checking_changes) > `
+![other_branch](images/other_branch.png)
 
 ## Aliases
 
