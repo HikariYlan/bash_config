@@ -5,7 +5,8 @@ Colors based on "Outer Wilds" and its DLC "Echoes Of The Eye"
 
 ## Installation script
 
-# ⚠ All preexisting file will be overwritten ⚠
+# ⚠ Preexisting file will be overwritten ⚠
+### Make sure to create a backup if you want to keep your actual .bashrc for later uses
 
 ```shell
 OLD_DIR=$(pwd)
