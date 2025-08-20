@@ -3,11 +3,13 @@ Feel free to use if you want
 
 Colors based on "Outer Wilds" and its DLC "Echoes Of The Eye"
 
-## Installation script
+## Installation/Uninstallation
 
-### ⚠ Preexisting file will be overwritten ⚠
-### Make sure to create a backup if you want to keep your actual .bashrc for later uses
-The installation script is available in the "Releases" section
+### ✅ A backup of your preexisting file will be available at ~/bashrc_backup ✅
+The installation script called "install.sh" is available in the "Releases" section
+
+The uninstallation script called "uninstall.sh" is also available in the "Releases" section.
+It will restore you .bashrc to its previous state, or simply delete it if you didn't have one already.
 
 ## Display changes
 
