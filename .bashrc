@@ -39,7 +39,7 @@ git_prompt_info() {
         [ -n "$upstream" ] && upstream+=" / "
         upstream+="${DRED}↓$behind${TURQUOISE}"
     fi
-    [ -z "$upstream" ] && upstream="${DGREEN}=${TURQUOISE}"
+    [ -z "$upstream" ] && upstream="${GREEN}=${TURQUOISE}"
 
     # staged / unstaged check
     local dirty="${GREEN}✔${TURQUOISE}"
