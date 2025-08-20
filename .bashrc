@@ -31,11 +31,7 @@ git_prompt_info() {
         behind=$(git rev-list --count HEAD..${tracking})
     fi
 
-    # Modifs staged / unstaged
-    local dirty="${GREEN}✔${TURQUOISE}"
-    git diff --quiet --ignore-submodules 2>/dev/null || dirty="${RED}*${TURQUOISE}"
-
-    # Upstream symbol
+    # Upstream check
     if [ "$ahead" -gt 0 ]; then
         upstream+="${DGREEN}↑$ahead${TURQUOISE}"
     fi
@@ -43,22 +39,20 @@ git_prompt_info() {
         [ -n "$upstream" ] && upstream+=" / "
         upstream+="${DRED}↓$behind${TURQUOISE}"
     fi
-    [ -z "$upstream" ] && upstream="${GREEN}=${TURQUOISE}"
+    [ -z "$upstream" ] && upstream="${DGREEN}=${TURQUOISE}"
+
+    # staged / unstaged check
+    local dirty="${GREEN}✔${TURQUOISE}"
+    git diff --quiet --ignore-submodules 2>/dev/null || dirty="${RED}*${TURQUOISE}"
 
     default_branch=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
     current_branch=$(git rev-parse --abbrev-ref HEAD)
 
     if [ "$current_branch" = "$default_branch" ]; then
-        local out=" ($branch → $upstream"
-        [ -n "$dirty" ] && out+=" / $dirty"
-        out+=")"
+        printf " (%s → %s / %s)" "$branch" "$upstream" "$dirty"
     else
-        local out=" ($branch ↱ $upstream"
-        [ -n "$dirty" ] && out+=" / $dirty"
-        out+=")"
+        printf " (%s ↱ %s / %s)" "$branch" "$upstream" "$dirty"
     fi
-
-    echo "$out"
 }
 
 set_bash_prompt() {
