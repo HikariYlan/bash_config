@@ -1,3 +1,2 @@
 .idea
-copy.sh
-installation.sh
+bin/
