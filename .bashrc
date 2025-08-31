@@ -6,6 +6,11 @@ RED='\[\033[38;2;255;0;0m\]'
 DRED='\[\033[38;2;150;0;0m\]'
 RESET='\[\033[0m\]'
 
+npush() {
+    echo
+    git diff --quiet --ignore-submodules 2>/dev/null || git add .; git commit -m "Commiting before going to sleep"; git push
+}
+
 alias stat="git status"
 alias log="git log"
 alias push="git push"
