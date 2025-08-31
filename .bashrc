@@ -4,6 +4,8 @@ GREEN='\[\033[38;2;0;255;0m\]'
 DGREEN='\[\033[38;2;0;150;0m\]'
 RED='\[\033[38;2;255;0;0m\]'
 DRED='\[\033[38;2;150;0;0m\]'
+BLUE='\[\033[38;2;0;123;255m\]'
+YELLOW='\[\033[38;2;255;255;0m\]'
 RESET='\[\033[0m\]'
 
 npush() {
@@ -55,9 +57,9 @@ git_prompt_info() {
     fi
 
     if [ "$current_branch" = "$default_branch" ]; then
-        printf " (%s → %s / %s)" "$branch" "$upstream" "$dirty"
+        printf " (%s ${BLUE}→${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
     else
-        printf " (%s ↱ %s / %s)" "$branch" "$upstream" "$dirty"
+        printf " (%s ${YELLOW}↱${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
     fi
 }
 
