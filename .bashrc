@@ -1,3 +1,4 @@
+curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
 ORANGE='\[\033[38;2;255;124;37m\]'
 TURQUOISE='\[\033[38;2;21;205;187m\]'
 GREEN='\[\033[38;2;0;255;0m\]'
@@ -68,3 +69,5 @@ set_bash_prompt() {
 }
 
 PROMPT_COMMAND=set_bash_prompt
+export PATH="$HOME/bin:$PATH"
+source ~/.bash_git
