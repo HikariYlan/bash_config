@@ -1,6 +1,7 @@
-curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
+curl -s https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
 ORANGE='\[\033[38;2;255;124;37m\]'
 TURQUOISE='\[\033[38;2;21;205;187m\]'
+WHITE='\[\033[38;2;252;220;196m\]'
 GREEN='\[\033[38;2;0;255;0m\]'
 DGREEN='\[\033[38;2;0;150;0m\]'
 RED='\[\033[38;2;255;0;0m\]'
@@ -8,11 +9,6 @@ DRED='\[\033[38;2;150;0;0m\]'
 BLUE='\[\033[38;2;0;123;255m\]'
 YELLOW='\[\033[38;2;255;255;0m\]'
 RESET='\[\033[0m\]'
-
-npush() {
-    echo
-    git diff --quiet --ignore-submodules 2>/dev/null || git add .; git commit -m "Commiting before going to sleep"; git push
-}
 
 alias stat="git status"
 alias log="git log"
@@ -58,9 +54,9 @@ git_prompt_info() {
     fi
 
     if [ "$current_branch" = "$default_branch" ]; then
-        printf " (%s ${BLUE}→${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
+        printf " (${WHITE}%s ${BLUE}→${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
     else
-        printf " (%s ${YELLOW}↱${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
+        printf " (${WHITE}%s ${YELLOW}↱${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
     fi
 }
 
