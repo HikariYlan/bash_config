@@ -16,6 +16,8 @@ alias push="git push"
 alias fpush="git push -u origin"
 alias pull="git pull"
 alias commit="git commit -m"
+alias commits="git shortlog -n -s"
+alias rebase='git checkout main && git pull --rebase && git checkout - && git rebase main'
 
 if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
     source "/usr/share/git/completion/git-prompt.sh"
