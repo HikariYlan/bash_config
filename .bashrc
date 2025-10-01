@@ -69,3 +69,4 @@ set_bash_prompt() {
 PROMPT_COMMAND=set_bash_prompt
 export PATH="$HOME/bin:$PATH"
 source ~/.bash_git
+[ -f /etc/bashrc ] && . /etc/bashrc
