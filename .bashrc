@@ -1,4 +1,3 @@
-curl -s https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
 ORANGE='\[\033[38;2;255;124;37m\]'
 TURQUOISE='\[\033[38;2;21;205;187m\]'
 WHITE='\[\033[38;2;252;220;196m\]'
@@ -16,15 +15,10 @@ alias push="git push"
 alias fpush="git push -u origin"
 alias pull="git pull"
 alias commit="git commit -m"
-alias commits="git shortlog -n -s"
-alias rebase='git checkout main && git pull --rebase && git checkout - && git rebase main'
-
-if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
-    source "/usr/share/git/completion/git-prompt.sh"
-fi
+alias commits="git shortlog -ns --no-merges"
 
 git_prompt_info() {
-    local branch=$(__git_ps1 "%s")
+    local branch=$(git branch --show-current)
     [ -z "$branch" ] && return
 
     local upstream=""
@@ -56,17 +50,11 @@ git_prompt_info() {
     fi
 
     if [ "$current_branch" = "$default_branch" ]; then
-        printf " (${WHITE}%s ${BLUE}→${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
+        printf " (%s ${BLUE}→${TURQUOISE} %s %s)" "$branch" "$upstream" "$dirty"
     else
-        printf " (${WHITE}%s ${YELLOW}↱${TURQUOISE} %s / %s)" "$branch" "$upstream" "$dirty"
+        printf " (%s ${YELLOW}↱${TURQUOISE} %s %s)" "$branch" "$upstream" "$dirty"
     fi
 }
 
-set_bash_prompt() {
-    PS1="${ORANGE}\w${TURQUOISE}$(git_prompt_info) ${RESET}> "
-}
-
-PROMPT_COMMAND=set_bash_prompt
+export PS1="${ORANGE}\w${TURQUOISE}$(git_prompt_info) ${RESET}> "
 export PATH="$HOME/bin:$PATH"
-source ~/.bash_git
-[ -f /etc/bashrc ] && . /etc/bashrc
