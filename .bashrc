@@ -18,6 +18,7 @@ alias commit="git commit -m"
 alias commits="git shortlog -ns --no-merges"
 
 git_prompt_info() {
+    [ -d .git ] && true || return
     local branch=$(git branch --show-current)
     [ -z "$branch" ] && return
 
@@ -56,5 +57,9 @@ git_prompt_info() {
     fi
 }
 
-export PS1="${ORANGE}\w${TURQUOISE}$(git_prompt_info) ${RESET}> "
+set_bash_prompt() {
+    PS1="${ORANGE}\w${TURQUOISE}$(git_prompt_info) ${RESET}> "
+}
+
+PROMPT_COMMAND=set_bash_prompt
 export PATH="$HOME/bin:$PATH"
